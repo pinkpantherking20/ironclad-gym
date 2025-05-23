@@ -1,7 +1,10 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 
-from ....models import Trainer
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from models import Trainer
 
 router = APIRouter(
     prefix="/trainers",

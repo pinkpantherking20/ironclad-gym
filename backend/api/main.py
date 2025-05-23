@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse
 from datetime import datetime
 
 # Import routers
-from .routers import members_router, classes_router, equipment_router, trainers_router, memberships_router
+from routers import members_router, classes_router, equipment_router, trainers_router, memberships_router
 
 # Load environment variables
 load_dotenv()
@@ -109,4 +109,4 @@ def health_check():
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("API_PORT", "3000"))
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=port, reload=True)

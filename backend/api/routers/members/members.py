@@ -2,7 +2,10 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from datetime import datetime, date
 
-from ....models import Member, Gender
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from models import Member, Gender
 
 router = APIRouter(
     prefix="/members",
