@@ -5,15 +5,20 @@ from dotenv import load_dotenv
 from fastapi.responses import HTMLResponse
 from datetime import datetime
 
+# Import routers
+from .routers import members_router, classes_router, equipment_router, trainers_router, memberships_router
+
 # Load environment variables
 load_dotenv()
 
 # Server startup timestamp for tracking changes
 SERVER_START_TIME = datetime.now().isoformat()
 
-app = FastAPI(title="Simple FastAPI App", 
-             description="A clean FastAPI application",
-             version="1.0.0")
+app = FastAPI(
+    title="Ironclad Gym Management API",
+    description="API for managing gym members, classes, equipment, trainers, and memberships",
+    version="1.0.0"
+)
 
 # Enable CORS
 app.add_middleware(
@@ -24,6 +29,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include routers
+app.include_router(members_router)
+app.include_router(classes_router)
+app.include_router(equipment_router)
+app.include_router(trainers_router)
+app.include_router(memberships_router)
 
 @app.get("/api/version")
 def get_version():
@@ -93,10 +104,6 @@ def auto_refreshing_docs():
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy"}
-
-@app.get("/hello")
-def say_hello():
-    return "Hello, World!"
 
 
 if __name__ == "__main__":
